@@ -1,0 +1,111 @@
+
+{{#if noHits}}
+
+    <div class="search-link-subject" style="color: #848484;font-size: 20px;margin-bottom: 40px;">Tyvärr.. vi hittade inget på <b>{{search}}</b>.</div>
+    
+
+{{else}}
+
+
+        {{#any searches}}
+            <div class="search-link-subject">Senaste sökningarna</div>
+            <div style="margin-bottom:40px">
+            {{#each searches}}        
+                <div class="search-history-item" val="{{this}}">{{this}}</div>
+            {{/each}}
+            </div>
+        {{/any}}
+
+{{/if}}
+
+        {{#any latest}}
+            <div class="search-link-subject">Senast använda</div>
+            <div class="search-link-row">
+                {{#each latest}}
+                    <div class="search-link-item {{area}}" link="{{url}}">
+                        <i class="{{icon}} primary search-link-item-icon"></i>
+                        <div class="search-link-item-title">{{title}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        
+        {{/any}}
+
+        {{#any popular}}
+            <div class="search-link-subject">Favoriter</div>
+            <div class="search-link-row">
+                {{#each popular}}
+                    <div class="search-link-item {{area}}" link="{{url}}">
+                        <i class="{{icon}} primary search-link-item-icon"></i>
+                        <div class="search-link-item-title">{{title}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/any}}
+
+
+
+
+<style>
+    .search-history-item{
+        margin-bottom: 10px;
+        background-color: #f7f7f7;
+        border-radius: 5px;
+        padding: 15px;
+        font-style: italic;
+        color: #888;
+    }
+  .search-link-item-title{
+        position: absolute;
+        right:10px;
+        bottom:10px;
+        left:10px;
+        
+        font-size:12px;
+    }
+    .search-link-item-icon{
+        position:absolute;
+        left:10px;
+        top:10px;
+        font-size:32px;
+    }
+    .search-link-subject{
+        font-size:28px;
+        margin-bottom:10px;
+
+    }
+    .search-link-row{
+        display:flex;
+        margin-bottom:40px;
+    }
+    .search-link-item{
+        width: calc(33% - 7px);
+        height:100px;
+        background-color:#fff;
+        border-radius:5px;
+        position:relative;
+        margin-right:10px;
+    }
+    .search-link-item:last-child{
+        margin-right:0px;
+    }
+    .search-link-item:active{
+        opacity:0.5;
+        transform:scale(0.95);          
+    }
+
+
+    .search-link-item.exchange .primary{
+        color:#9B59B6
+    }
+
+    .search-link-item.tools .primary{
+        color:#E67E22
+    }
+
+    .search-link-item.facts .primary{
+        color:#1ABC9C
+    }
+
+
+</style>

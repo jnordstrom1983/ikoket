@@ -1,0 +1,63 @@
+
+            .scroller-shade-top{
+                position:absolute;
+                left:0px;
+                top:0px;
+                right:0px;
+                height:90px;
+                background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 80%);
+                pointer-events:none;
+                z-index: 3;
+            }
+            .scroller-shade-bottom{
+                position:absolute;
+                left:0px;
+                bottom:0px;
+                right:0px;
+                height:90px;
+                background: linear-gradient(00deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 80%);
+                pointer-events:none;
+                z-index: 3;
+            }
+            .scroller-shade-center{
+                position: absolute;
+                left: 0px;
+                top: 90px;
+                height: 30px;
+                background-color: #e8e8e8;
+                right: 0px;
+                z-index: 1;
+                border-radius: 5px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+
+            .scroller-outer{
+                position:relative;
+                width:100%;
+                height:210px;
+            }
+            .scroller{
+                
+                height:210px;
+                overflow:scroll;
+                -webkit-overflow-scrolling: touch;
+                z-index: 2;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
+            }
+
+            .scroller::-webkit-scrollbar {
+            display: none;
+            }
+
+
+            .scroller div{
+                height:30px;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+            }

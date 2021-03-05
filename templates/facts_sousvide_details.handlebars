@@ -1,0 +1,96 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/facts/sous-vide" link-mode="pop"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Fakta</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Sous vide 
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+            <div class="sous-vide-name primary">{{item.Name}} </div>
+
+            
+            {{#many item.Alterations}}
+            <div class="sous-vide-message">Kan tillagas på följande sätt:</div>
+                {{#each item.Alterations}}
+                            
+                            <div class="sous-vide-alteration">
+                            
+                            
+                                <div class="sous-vide-alteration-name">{{Name}}</div>
+                    
+                                <div class="sous-viode-alteration-info">
+                                
+                                    <div style="margin-right:20px">
+                                        <i class="fas fa-thermometer-quarter primary"></i> {{Temp}}
+                                    </div>
+
+                                    <div>
+                                        <i class="fas fa-clock primary"></i> {{Time}}
+                                    </div>
+
+                                </div>
+                            </div>
+                {{/each}}
+            {{else}}
+                <div class="sous-vide-message">tillagas:</div>
+
+         
+                                <div class="sous-viode-alteration-info">
+                                
+                                    <div style="margin-right:20px">
+                                        <i class="fas fa-thermometer-quarter primary"></i> {{item.Alterations.[0].Temp}}
+                                    </div>
+
+                                    <div>
+                                        <i class="fas fa-clock primary"></i> {{item.Alterations.[0].Time}}
+                                    </div>
+
+                                </div>
+
+            {{/many}}
+
+
+    </div>
+
+    <style>
+        .sous-vide-message{
+            font-size:24px;
+            margin-bottom:20px;
+        }
+        .sous-vide-name{
+            font-size:36px;
+            font-weight:800;
+            margin-bottom:20px;
+        }
+        .sous-vide-alteration{
+            margin-bottom:40px;
+        }
+        .sous-vide-alteration-name{
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom:10px;
+        }
+
+        .sous-viode-alteration-info{
+            display:flex;
+            align-items:center;
+        }
+        .sous-viode-alteration-info div{
+            font-size:24px;
+            color:#6d6d6d;
+
+        }
+
+    </style>
+
+</div>
+

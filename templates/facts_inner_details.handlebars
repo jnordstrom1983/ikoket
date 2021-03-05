@@ -1,0 +1,72 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/facts/inner" link-mode="pop"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Fakta</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Innertemperatur 
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+            <div class="temp-name primary">{{item.Name}} </div>
+
+            
+            {{#many item.Temperatures}}
+            <div class="temp-message">kan tillagas till följande innertemperaturer:</div>
+                {{#each item.Temperatures}}
+                    <div class="temp-row">
+                        <div class="temp-title">
+                            {{Name}}
+                        </div>
+                        <div class="temp-value">
+                            {{Temperature}}°
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="temp-message">bör tillagas till:</div>
+                <div class="temp-single">{{item.Temperatures.[0].Temperature}}°</div>
+            {{/many}}
+
+
+    </div>
+
+    <style>
+        .temp-message{
+            font-size:24px;
+            margin-bottom:20px;
+        }
+        .temp-name{
+            font-size:36px;
+            font-weight:800;
+            margin-bottom:20px;
+        }
+        .temp-row{
+            display:flex;
+            align-items:center;
+            margin-bottom:20px;
+        }
+        .temp-title{
+            font-size:22px;
+            font-weight:300;
+            flex-grow:1;
+        }
+        .temp-value{
+            font-size:48px;
+            font-weight:600;
+        }
+        .temp-single{
+            font-size:64px;
+            font-weight:600;
+        }
+    </style>
+
+</div>
+

@@ -1,0 +1,154 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/facts/kcal" link-mode="pop"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Fakta</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Kalorier
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+            <span class="kcal-name primary">{{item.Name}}</span> 
+            <span class="kcal-message">innehåller</span> <span class="kcal-message primary large"  perhundred="{{item.kcal}}">{{item.kcal}}</span>
+            <span class="kcal-message">kcal per <span class="kcal-link" id="kcal_weight">100g</span>.</span>
+
+
+       <div class="kcal-sub-subject" >Per <span id="kcal_weight2">100g</span>:</div>
+
+
+<div class="kcal-row">
+    <div class="kcal-title">
+        KCAL
+    </div>
+    <div class="kcal-value" perhundred="{{item.kcal}}">
+        {{item.kcal}}
+    </div>
+</div>
+
+<div class="kcal-row">
+    <div class="kcal-title">
+        Fett
+    </div>
+    <div class="kcal-value" perhundred="{{item.fat}}">
+        {{item.fat}}
+    </div>
+</div>
+
+<div class="kcal-row">
+    <div class="kcal-title">
+        Protin
+    </div>
+    <div class="kcal-value"  perhundred="{{item.protien}}">
+        {{item.protien}}
+    </div>
+</div>
+
+<div class="kcal-row">
+    <div class="kcal-title">
+        Fiber
+    </div>
+    <div class="kcal-value" perhundred="{{item.fibre}}">
+        {{item.fibre}}
+    </div>
+</div>
+
+
+
+
+
+    </div>
+
+    <script>
+
+        var KcalWeight = 100;
+        function UpdateKcalValues(){
+            $view("#kcal_weight").text(KcalWeight + "g")
+            $view("#kcal_weight2").text(KcalWeight + "g")
+            var v = KcalWeight / 100;
+
+            $view("[perhundred]").each(function(){
+                console.log(v)
+                var val = $(this).attr('perhundred') * v;
+                
+                $(this).text(  val.toFixed(1) );
+            })
+        }
+
+        $view("#kcal_weight").click(function(){
+
+            var items = [
+                { "text" : "5g", value : "5"},
+                { "text" : "10g", value : "10"},
+                { "text" : "15g", value : "15"},
+                { "text" : "25g", value : "25"},
+                { "text" : "50g", value : "50"},
+                { "text" : "100g", value : "100"},
+                { "text" : "200g", value : "200"},
+                { "text" : "300g", value : "300"},
+                { "text" : "400g", value : "400"},
+                { "text" : "500g", value : "500"},
+                { "text" : "600g", value : "600"},
+                { "text" : "700g", value : "700"},
+                { "text" : "800g", value : "800"},
+                { "text" : "900g", value : "900"},
+                { "text" : "1kg", value : "1000"},
+
+            ]
+                
+            overlay.wheel(items, KcalWeight, "Välj vikt", function(val){
+                KcalWeight = val - 0;
+                UpdateKcalValues();
+            })
+
+        })
+    </script>
+
+    <style>
+        .kcal-message{
+            font-size:24px;
+            margin-bottom:20px;
+        }
+        .kcal-message.large{
+            font-weight:600;
+            font-size:36px;
+        }
+        .kcal-name{
+            font-size:36px;
+            font-weight:800;
+            margin-bottom:20px;
+        }
+        .kcal-link{
+            color:#FF3366
+        }
+
+        .kcal-row{
+            display:flex;
+            align-items:center;
+            margin-bottom:20px;
+        }
+        .kcal-title{
+            font-size:22px;
+            font-weight:300;
+            flex-grow:1;
+        }
+        .kcal-value{
+            font-size:28px;
+        }
+        .kcal-sub-subject{
+            font-size:36px;
+            font-weight:700;
+            margin-top:40px;
+            margin-bottom:10px;
+        }  
+
+    </style>
+
+</div>
+

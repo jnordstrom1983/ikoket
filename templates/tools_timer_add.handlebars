@@ -1,0 +1,141 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/tools/timers"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Verktyg</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Skapa ny timer
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+
+        <div style="margin-bottom:40px;display:flex;justify-content:center">
+            <input type="text" placeholder="Ge timern ett namn" id="txtName">
+        </div>
+
+        <div id="wheels-holder">
+        
+            <div>
+                <div class="wheel-subject">Tim</div>
+                <div id="wheels-holder-hour" class="wheel-holder"></div>
+            </div>
+            <div>
+                <div class="wheel-subject">Min</div>
+                <div id="wheels-holder-minute"  class="wheel-holder"></div>
+            </div>
+            <div>
+                <div class="wheel-subject">Sek</div>
+                <div id="wheels-holder-second"  class="wheel-holder"></div>
+            </div>
+
+            
+
+        </div>
+
+        <div style="margin-top:40px;display:flex;justify-content:center">
+            <div id="btnSave">Skapa timer</div>
+        </div>
+   
+    </div>
+
+    <script>
+        
+        var hours = []
+        for(var x = 0;x<37;x++) hours.push({ "text" : x, "value" : x});
+
+        var minutes = []
+        for(var x = 0;x<60;x++) minutes.push({ "text" : x, "value" : x});
+        
+        $("#wheels-holder-hour").html(Handlebars.helpers.wheel("wheelH", hours , 0));
+
+        $("#wheels-holder-minute").html(Handlebars.helpers.wheel("wheelM", minutes , 0));
+        $("#wheels-holder-second").html(Handlebars.helpers.wheel("wheelS", minutes , 0));
+
+        $("#btnSave").click(function(){
+            var h = $("#wheels-holder-hour").find(".scroller").attr('value') -0;
+            var m = $("#wheels-holder-minute").find(".scroller").attr('value') -0;
+            var s = $("#wheels-holder-second").find(".scroller").attr('value') -0;
+
+            var seconds = h * 3600 + (m * 60) + s;
+            if(seconds == 0){
+                return;
+            }
+
+
+            timers.add(seconds, $("#txtName").val())
+            message.success("Nedräkningen skapad.")
+            app.navigate('/tools/timers')
+
+
+        })
+         $("#txtName").keydown(function(ev){
+             if(ev.keyCode == 13) $("#txtName").blur();
+         })
+    </script>
+
+
+    <style>
+        #btnSave{
+            background-color:#E67E22;
+            width:200px;
+            padding-left:20px;
+            padding-right:20px;
+            padding-top:20px;
+            padding-bottom:20px;
+            color:#fff;
+            border-radius:30px;
+            text-align:center;
+            transition-duration:0.3s;
+        }
+
+        #btnSave:active{
+            opacity:0.5;
+            transform:scale(0.95);                
+        }
+
+
+
+        #wheels-holder{
+            display:flex;
+        }
+        #wheels-holder>div{
+            width:33%;
+        }
+        .wheel-holder{
+            margin-left:10px;
+            margin-right:10px;
+     
+        }
+        .wheel-subject{
+            font-weight:600;
+            text-align:center;
+            color:#888;
+            margin-bottom:10px;
+        }
+        #txtName{
+            outline: none;
+            background-color: #e0e0e0;
+            border-radius: 50px;
+            border: 0px;
+            padding: 10px;
+            font-size: 18px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        #btnSave{
+
+        }
+    </style>
+        
+
+</div>
+ 
+

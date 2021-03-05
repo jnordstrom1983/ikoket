@@ -1,0 +1,128 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/tools/home"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Verktyg</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Timer
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+
+        <div class="app-activity" filter="timer" style="margin-bottom:30px">
+
+            <div class="timer-subject">Pågående</div>
+            <div class="app-activity-list"></div>
+            <div style="clear:both"></div>
+
+        </div>
+
+
+        <div class="timer-subject">Skapa ny timer</div>
+
+
+
+
+            <div class="timer-add center-icon" link="/tools/timer/add">
+                <i class="fas fa-plus primary timer-add-icon-large"></i>
+
+            </div>
+
+            {{#each history}}       
+
+                <div class="timer-add clone" seconds="{{seconds}}" name="{{name}}">
+                    <i class="fal fa-redo primary timer-add-icon"></i>
+                    <div class="timer-add-title">
+                        <div>{{name}}</div>
+                        <div class="timer-add-title-fat">{{time}}</div>
+                    </div>
+                </div>
+
+            {{/each}}
+
+
+
+    </div>
+
+        
+
+</div>
+ 
+
+<script>
+    activityMonitorIntervalTick();
+
+    $(".timer-add.clone").click(function(){
+        timers.add($(this).attr('seconds')-0, $(this).attr('name'));
+        message.success("Nedräkningen skapad.")
+
+       
+
+    })
+</script>
+
+<style>
+
+    .timer-add-icon-large{
+        font-size:64px;
+    }
+
+    .timer-subject{
+        font-size:28px;
+        margin-bottom:10px;
+    }
+
+
+    .timer-add-title{
+        position: absolute;
+        right:10px;
+        bottom:10px;
+        left:10px;
+        
+        font-size:12px;
+    }
+    .timer-add-title-fat{
+        font-weight:600;
+        font-size:16px;
+    }
+
+
+    .timer-add-icon{
+        position:absolute;
+        left:10px;
+        top:10px;
+        font-size:32px;
+    }
+
+    .timer-add{
+        width: calc(33% - 15px);
+        height: 100px;
+        background-color: #fff;
+        border-radius: 5px;
+        position: relative;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        float: left;
+        transition-duration:0.3s;
+    }    
+
+
+    .timer-add.center-icon{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .timer-add:active{
+        opacity:0.5;
+        transform:scale(0.95);                
+    }
+
+</style>

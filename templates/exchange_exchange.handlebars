@@ -1,0 +1,183 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/exchange/home" link-mode="pop"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Omvanda</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            {{title}} / {{unit.title}}
+        </div>
+
+    </div>
+
+    <div class="view-main">
+
+        <div class="exchange-big" id="btnSelectAmount">
+            <span class="primary" id="txtAmount">1</span> <span id="from_unit">{{unit.from_unit}}</span>
+            {{#if unit.product}}
+                <span class="product">{{lcase unit.product}}</span>
+            {{/if}}
+        </div>
+        <div class="exchange-small">
+            är samma som
+        </div>        
+        <div class="exchange-medium" id="btnReverse">
+            <span class="bold" id="txtCalculatedAmount">{{unit.factor}}</span> <span id="to_unit">{{unit.to_unit}}</span>
+            
+            {{#if unit.product}}
+                <span class="product">{{lcase unit.product}}</span>
+            {{/if}}
+
+             <i class="fal fa-retweet primary" ></i>
+
+        </div>
+
+    </div>
+
+
+    <style>
+        .exchange-big{
+            font-size:56px;
+            font-weight:800;
+        }
+        .exchange-small{
+            font-size:24px;
+        }      
+        .exchange-medium{
+            font-size:42px;
+        }               
+        .exchange-medium .bold{
+            font-weight:800;
+        }       
+        .exchange-big .product{
+            font-weight:600;
+        }         
+    </style>
+
+    <script>
+
+
+        exchange.CurrentUnit.current_alternative_from = exchange.CurrentUnit.from_unit; 
+        $view("#btnReverse").click(function(){
+            exchange.IsReversed = !exchange.IsReversed
+            exchange.calculate();
+        })
+        $view("#btnSelectAmount").click(function(){
+
+
+            var unit = "";
+            if(exchange.IsReversed){
+                unit = exchange.CurrentUnit.to_unit
+            }else{
+                unit = exchange.CurrentUnit.from_unit;
+            }
+
+
+
+
+             if(!exchange.IsReversed && exchange.CurrentUnit.alternative_units != null){ 
+
+                var items = exchange.CurrentUnit.options.map(function(item){
+                    return {"value" : item, "text" : item  }
+                })
+                var units =  exchange.CurrentUnit.alternative_units.map(function(item){
+                    return {"value" : item.name, "text" : item.name  }
+                })
+                overlay.doubleWheel(items, exchange.CurrentValue, units, exchange.CurrentUnit.current_alternative_from, "", function(val, val2){
+                    exchange.CurrentValue = val;
+                    exchange.CurrentUnit.current_alternative_from = val2;
+                     exchange.calculate();
+                })
+
+
+
+             }else{
+                var items = exchange.CurrentUnit.options.map(function(item){
+                    return {"value" : item, "text" : item + " " + unit }
+                })
+
+                overlay.wheel(items, exchange.CurrentValue, "", function(val){
+                    exchange.CurrentValue = val;
+                    exchange.calculate();
+                })
+
+
+
+             }
+
+
+
+
+
+        })
+
+
+
+        exchange.calculate = function(){
+
+
+            $view("#txtAmount").text(exchange.CurrentValue);
+
+            var v = exchange.CurrentValue;
+            if(exchange.IsReversed){
+                if(exchange.CurrentUnit.formula != null){
+                    v = exchange.CurrentUnit.formula(v);
+                }else{
+                    v = v / exchange.CurrentUnit.factor;
+                }
+
+
+                if(exchange.CurrentUnit.alternative_units != null){
+                    var alt = exchange.CurrentUnit.alternative_units.find(function(item){
+                        return item.name == exchange.CurrentUnit.current_alternative_from
+                    })
+                    v = v * (1/alt.ratio);
+                }
+
+
+                if(exchange.CurrentUnit.alternative_units == null){
+                    $view("#to_unit").text(exchange.CurrentUnit.from_unit);
+                }else{
+                    $view("#to_unit").text(exchange.CurrentUnit.current_alternative_from);
+                    
+                }
+                
+                $view("#from_unit").text(exchange.CurrentUnit.to_unit);                
+            }else{
+                if(exchange.CurrentUnit.formula != null){
+                    v = exchange.CurrentUnit.formula(v);
+                }else{
+                    v = v * exchange.CurrentUnit.factor;
+                    
+                    if(exchange.CurrentUnit.alternative_units != null){
+                        var alt = exchange.CurrentUnit.alternative_units.find(function(item){
+                            return item.name == exchange.CurrentUnit.current_alternative_from
+                        })
+                        v = v * alt.ratio;
+                    }
+
+                }
+                
+
+                if(exchange.CurrentUnit.alternative_units == null){
+                    $view("#from_unit").text(exchange.CurrentUnit.from_unit);
+                }else{
+                    $view("#from_unit").text(exchange.CurrentUnit.current_alternative_from);
+                    
+                }
+
+                $view("#to_unit").text(exchange.CurrentUnit.to_unit);
+            }
+            $view("#txtCalculatedAmount").text((v.toFixed(2)-0).toString())
+
+            
+
+        }
+         exchange.calculate();
+    </script>
+
+</div>
+

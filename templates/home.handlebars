@@ -1,0 +1,225 @@
+<div class="view-inner {{area}}">
+<!--
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Trevlig kväll</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Lorum ipsum
+        </div>
+    </div>
+
+    -->
+    <div class="header">
+        <div class="header-main">
+            <div class="header-title no-icon">{{greeting}}</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <!--
+        <div class="header-subtitle primary">
+            Lorum ipsum
+        </div>
+        -->
+    </div>
+
+
+    <div class="view-main">
+
+        <div class="app-activity" style="margin-bottom:30px">
+
+            <div class="home-link-subject">Aktivitet</div>
+            <div class="app-activity-list"></div>
+            <div style="clear:both"></div>
+
+        </div>
+
+
+
+        {{#any latest}}
+            <div class="home-link-subject">Senaste</div>
+            <div class="home-link-row">
+                {{#each latest}}
+                    <div class="home-link-item {{area}}" link="{{url}}">
+                        <i class="{{icon}} primary home-link-item-icon"></i>
+                        <div class="home-link-item-title">{{title}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <div class="welcome-subject">Välkommen till iKöket!</div>
+            <div class="welcome-description">
+                Det här är din nya assistent i köket. Börja utforska funktionerna direkt:
+
+            
+
+
+            </div>
+
+        {{/any}}
+
+        {{#any popular}}
+            <div class="home-link-subject">Favoriter</div>
+            <div class="home-link-row">
+                {{#each popular}}
+                    <div class="home-link-item {{area}}" link="{{url}}">
+                        <i class="{{icon}} primary home-link-item-icon"></i>
+                        <div class="home-link-item-title">{{title}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/any}}
+
+
+        <style>
+            .home-link-item-title{
+                position: absolute;
+                right:10px;
+                bottom:10px;
+                left:10px;
+                
+                font-size:12px;
+            }
+            .home-link-item-icon{
+                position:absolute;
+                left:10px;
+                top:10px;
+                font-size:32px;
+            }
+            .home-link-subject{
+                font-size:28px;
+                margin-bottom:10px;
+
+            }
+            .home-link-row{
+                display:flex;
+                margin-bottom:40px;
+            }
+            .home-link-item{
+                width: calc(33% - 7px);
+                height:100px;
+                background-color:#fff;
+                border-radius:5px;
+                position:relative;
+                margin-right:10px;
+            }
+            .home-link-item:last-child{
+                margin-right:0px;
+            }
+            .home-link-item:active{
+                opacity:0.5;
+                transform:scale(0.95);          
+            }
+
+
+            .home-link-item.exchange .primary{
+                color:#9B59B6
+            }
+
+            .home-link-item.tools .primary{
+                color:#E67E22
+            }
+
+            .home-link-item.facts .primary{
+                color:#1ABC9C
+            }
+
+            .welcome-subject{
+                font-size:32px;
+                font-weight:600;
+                margin-bottom:10px;
+            }
+            .welcome-description{
+                font-size:22px;
+                margin-bottom:40px;
+                color: #828282;
+                font-weight:300;
+            }
+
+
+
+        }
+        </style>
+
+
+        <div class="home-button exchange" link="/exchange/home">
+            <div class="home-button-title">Omvandla</div>
+            <div class="home-button-icon"><i class="fal fa-exchange-alt"></i></div>
+        </div>
+
+        <div class="home-button tools" link="/tools/home">
+            <div class="home-button-title">Verktyg</div>
+            <div class="home-button-icon"><i class="fal fa-tools"></i></div>
+        </div>
+
+        <div class="home-button facts" link="/facts/home">
+            <div class="home-button-title">Fakta</div>
+            <div class="home-button-icon"><i class="fal fa-books"></i></div>
+        </div>
+
+
+<!--
+        {{{wheel "test" "a,b,c" "b"}}}
+
+-->
+
+
+    </div>
+
+</div>
+<style>
+
+    .home-button{
+        display:flex;
+        color:#fff;
+        border-radius:10px;
+        overflow:hidden;
+        align-items:center;
+        margin-bottom:20px;
+    }
+    .home-button-title{
+        font-weight:600;
+        font-size:18px;
+        flex-grow:1;
+        padding-left:20px;
+    }
+    .home-button-icon{
+        font-size:36px;
+        height:80px;
+        width:100px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+    }
+    .home-button.exchange{
+        background-color:#9B59B6
+    }
+    .home-button.exchange .home-button-icon{
+        background-color:#8E44AD;
+    }    
+
+    .home-button.tools{
+        background-color:#E67E22
+    }
+    .home-button.tools .home-button-icon{
+        background-color:#D35400;
+    }    
+
+    .home-button.facts{
+        background-color:#1ABC9C
+    }
+    .home-button.facts .home-button-icon{
+        background-color:#16A085;
+    }    
+
+
+
+  
+
+</style>
+
+<script>
+    activityMonitorIntervalTick();
+</script>

@@ -1,0 +1,36 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/facts/inner"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Fakta</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Innertemperatur / {{category.Name}}
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+
+
+        
+        <div>
+            {{#each items}}
+            <div class="list-item" link="facts/inner/{{Category}}/{{id}}" link-mode="push">
+                <div class="list-item-content">
+                    <div class="list-item-title">{{Name}}</div>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+
+
+    </div>
+
+</div>
+

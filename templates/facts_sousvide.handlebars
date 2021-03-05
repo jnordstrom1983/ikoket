@@ -1,0 +1,65 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/facts/home"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Fakta</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Sous vide
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+
+
+        
+            {{#each categories}}
+            <div class="category_subject">
+                <div class="category_subject_icon primary">
+                    <i class="{{Icon}}"></i>
+                </div>
+                <div class="category_subject_name">
+                    {{Name}}
+                </div>
+
+            </div>
+                {{#each items}}
+                <div class="list-item" link="facts/sous-vide/{{id}}">
+                    <div class="list-item-content">
+                        <div class="list-item-title">{{Name}}</div>
+                    </div>
+                </div>
+                {{/each}}
+            {{/each}}
+
+
+
+    </div>
+
+</div>
+
+<style>
+    .category_subject{
+        display:flex;
+        align-items:center;
+        margin-bottom:10px;
+        margin-top:40px;
+    }
+    .category_subject:first-child{
+        margin-top:0px;
+    }
+    .category_subject_icon{
+        font-size:48px;
+        margin-right:10px;
+    }
+    .category_subject_name{
+        font-size:28px;
+        font-weight:200;
+    }
+</style>
+

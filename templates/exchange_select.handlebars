@@ -1,0 +1,65 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/exchange/home" ><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Omvanda</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            {{title}}
+        </div>
+
+    </div>
+
+    <div class="view-main">
+
+        
+
+        
+        <div>
+            
+            {{#if categories}}
+                {{#each categories}}
+                        <div class="category_subject_name">{{@key}}</div>
+                        {{#each this}}
+                            <div class="list-item" link="exchange/{{@root.type}}/{{@key}}">
+                                <div class="list-item-content">
+                                    <div class="list-item-title">{{title}}</div>
+                                </div>
+                            </div>
+                        {{/each}}
+                {{/each}}
+            {{else}}
+                <div class="view-sujbect">Välj enhet</div>
+                {{#each units}}
+                <div class="list-item" link="exchange/{{@root.type}}/{{@key}}">
+                    <div class="list-item-content">
+                        <div class="list-item-title">{{title}}</div>
+                    </div>
+                </div>
+                {{/each}}
+
+            {{/if}}
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<style>
+.category_subject_name{
+        font-size: 28px;
+    font-weight: 200;
+    margin-top:40px;
+    margin-bottom:10px;
+}
+.category_subject_name:first-child{
+    margin-top:0px;
+}
+</style>
+

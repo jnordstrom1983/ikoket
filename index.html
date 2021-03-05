@@ -1,0 +1,113 @@
+<html>
+    <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="initial-scale=1, viewport-fit=cover,  maximum-scale=1">
+
+         <script src="capacitor.js" type="text/javascript"></script>
+         
+<link rel="stylesheet" href="css/font.css"></link>
+<link rel="stylesheet" href="css/fontawesome.css"></link>
+<link rel="stylesheet" href="css/main.css"></link>
+<link rel="stylesheet" href="css/scroller.css"></link>
+
+
+<script src="lib/handlebars.js"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/swiped.js"></script>
+<script src="js/data.js"></script>
+<script src="js/exchange.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/listeners.js"></script>
+<script src="js/main.js"></script>
+<script src="js/message.js"></script>
+<script src="js/overlay.js"></script>
+<script src="js/search.js"></script>
+<script src="js/timers.js"></script>
+
+<script src="app/router.js"></script>
+<script src="app/app.js"></script>
+<script src="app/viewController.js"></script>
+<script src="app/db.js"></script>
+<script src="app/uuid.js"></script>
+<script src="app/history.js"></script>
+        
+<script src="routes/home.js"></script>
+<script src="routes/exchange.js"></script>
+<script src="routes/tools.js"></script>
+<script src="routes/facts.js"></script>
+    
+
+    </head>
+    <body ontouchstart="">
+        <div id="search">
+            <form action="." onsubmit="return false" id="searchForm">
+                <div id="search-top-bar">
+                    
+                    <input type="search"  id="search-input" placeholder="Sök efter...">
+                    
+                    <div id="search-close-icon-holder">
+                        <i class="fal fa-times"></i>
+                    </div>
+                </div>
+            </form>
+            <div id="search-result">
+          
+            </div>
+        </div>
+
+
+        <div id="success">
+            <i class="fal fa-check"></i>
+            <div id="success_message"></div>
+        </div>
+        <div id="overlay-blind"></div>
+
+        <div id="overlay-wheel" class="overlay">
+            <div class="overlay-inner">
+                <div id="overlay-wheel-header">
+                    <div id="overlay-wheel-header-description"></div>
+                    <div id="overlay-wheel-close" class="primary">Klar</div>
+                </div>
+                <div id="overlay-wheel-holder"></div>
+            </div>
+
+        </div>
+        
+
+        <div id="main">
+            <div id="header"></div>
+            <div id="views"></div>
+            <div id="footer">
+                <div id="footer-items">
+                    <div class="footer-item" id="footer-home" link="/home/home">
+                        <div>
+                            <i class="fal fa-home"></i>
+                        </div>
+                    </div>
+                    <div class="footer-item" id="footer-exchange" link="/exchange/home">
+                        <div>
+                            <i class="fal fa-exchange-alt"></i>
+                        </div>
+                    </div>
+                    <div class="footer-item" id="footer-tools" link="/tools/home">
+                        <div>
+                            <i class="fal fa-tools"></i>
+                        </div>
+                    </div>
+                    <div class="footer-item" id="footer-facts" link="/facts/home">
+                        <div>
+                            <i class="fal fa-books"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+   
+        </style>
+        <script>
+            app.init();            
+        </script>
+    </body>
+
+</html!>

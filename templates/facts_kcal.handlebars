@@ -1,0 +1,107 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/facts/home"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Fakta</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            Kalorier
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+        {{#if char}}
+
+        {{else}}
+            <div class="view-sujbect" style="margin-bottom:0px">Hur mycket kalorier innehåller en livsmedlet?</div>
+            <div class="view-sujbect" style="color:#888;font-size:22px"> Välj den bokstav som livsmedlet börjar på?</div>
+
+        {{/if}}
+
+        {{#each chars}}
+            <div class="kcal_char" char="{{this}}">{{this}}</div>
+
+
+        {{/each}}
+        
+    </div>
+
+        
+
+</div>
+    <script type="text/handlebars" id="tplList">
+{{{{raw}}}}
+    <div id="kcal_list">
+        {{#each items}}
+            <div class="list-item" link="facts/kcal/{{id}}" link-mode="push">
+                <div class="list-item-content">
+                    <div class="list-item-title">{{Name}}</div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{{{/raw}}}}
+
+
+
+</script>
+<script>
+    $view(".kcal_char").click(function(){
+        var char = $(this).attr('char').toLowerCase();
+        $("#kcal_list").remove();
+        
+        if($(this).hasClass("active")){
+            $(this).removeClass("active");
+            return;
+        }
+
+        $(".kcal_char").removeClass("active");
+        
+        var filtered = StaticData.KCAL.filter(function(item){
+            return item.Name.substr(0,1).toLowerCase() == char;
+        })
+
+
+        var ht = $("#tplList").html();
+        var tpl = Handlebars.compile(ht)
+        var html = tpl({"items" : filtered});
+        l = $(html)
+
+        l.insertAfter($(this))
+        $(this).addClass("active");
+    })
+</script>
+<style>
+    #kcal_list{
+        clear:both;
+        
+    }
+    .kcal_char{
+        height: 70px;
+        width: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        float: left;
+        margin-right: 12px;
+        margin-bottom: 12px;
+        font-size: 28px;
+        transition-duration: 0.3s;
+        xfont-weight: 600;
+        border-radius: 5px;
+        background-color: #1abc9c;
+    }
+
+    .kcal_char:active{
+        opacity:0.5;
+        transform:scale(0.95);                
+    }
+
+</style>
+

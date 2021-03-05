@@ -1,0 +1,100 @@
+<div class="view-inner {{area}}">
+
+
+    <div class="header">
+        <div class="header-main">
+            <div class="header-icon left primary back-button" link="/tools/timers"><i class="fal fa-chevron-left"></i></div>
+            <div class="header-title">Verktyg</div>
+            <div class="header-icon right primary search-button"><i class="fal fa-search"></i></div>
+        </div>
+        <div class="header-subtitle primary with-icon">
+            {{#if timer.name}}
+                {{timer.name}}
+            {{else}}
+                Pågående nedräkning.
+            {{/if}}
+        </div>
+
+    </div>
+
+
+    <div class="view-main">
+
+       <div id="txtCount">
+
+       </div>
+
+        <div style="margin-top:40px;display:flex;justify-content:center">
+            <div id="btnStop">Stoppa</div>
+        </div>
+   
+    </div>
+
+    <script>
+        clearInterval(app.timerUpdate);
+
+        var timerUpdateFn = function(){
+            if( $view("#txtCount").length == 0){
+                clearInterval(app.timerUpdate);
+                return;
+            }
+            var exp = {{timer.exp}};
+            if(new Date() > new Date(exp)){
+                $view("#txtCount").text( "00:00" )
+                $view("#txtCount").toggleClass("red")
+                $view("#btnStop").hide();
+
+            }else{
+                    $view("#txtCount").text( timers.getCountDownText(exp) )
+            }
+            
+
+        }
+
+        $view("#btnStop").click(function(){
+            timers.delete({{timer.id}});
+            message.success("Nedräkningen stoppad.")
+            app.navigate("/tools/timers")
+
+        })
+
+        app.timerUpdate = setInterval(timerUpdateFn, 500)
+        timerUpdateFn();
+        </script>
+
+
+    <style>
+        #txtCount{
+            font-weight:200;
+            text-align:center;
+            font-size:72px;
+        }
+        #txtCount.red{
+            color:#f00;
+        }
+        #btnStop{
+            background-color:#E67E22;
+            width:200px;
+            padding-left:20px;
+            padding-right:20px;
+            padding-top:20px;
+            padding-bottom:20px;
+            color:#fff;
+            border-radius:30px;
+            text-align:center;
+            transition-duration:0.3s;
+        }
+
+        #btnStop:active{
+            opacity:0.5;
+            transform:scale(0.95);                
+        }
+
+
+
+    </style>
+        
+
+</div>
+ 
+
